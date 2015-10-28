@@ -21,7 +21,7 @@ def exit():
 
 def update():
     if(LogoCnt == 20):
-        #delay(2)
+        delay(1)
         FrameWork.push_state(Title)
     pass
 
@@ -31,7 +31,6 @@ def draw():
     if(LogoCnt < 20):
         delay(0.05)
         LogoCnt += 1
-       # if LogoCnt == 1:
 
     for i in range(0 ,LogoCnt):
         Loading[i].draw(400 , 300)
