@@ -1,6 +1,7 @@
 import FrameWork
 import Main
 from pico2d import *
+from Gunner import *
 
 __author__ = 'HeeYong'
 image = None
@@ -33,7 +34,7 @@ def handle_events():
 
 def draw():
     clear_canvas()
-    image.draw(400 , 300)
+    image.draw(1600 , 600)
     update_canvas()
     pass
 
