@@ -150,18 +150,20 @@ class Gunner():
             self.startframe = 0
             self.endframe = 12
 
-        if self.RightGoing :
-            self.x = min(800 , self.x + self.speed)
-            print("오른 걷기")
-        elif self.LeftGoing:
-            self.x = max(0 , self.x - self.speed)
-            print("왼 걷기")
-        if self.Upgoing == True :
-            self.y = min(600 , self.y + self.speed)
-            print("윗 걷기")
-        elif self.DownGoing == True and self.state == self.RIGHT_WALK:
-            self.y = max(0 , self.y - self.speed)
-            print("아랫 걷기")
+        if self.state == self.RIGHT_WALK and self.state == self.RIGHT_SHOT:
+            print("오른쪽으로 가면서 쏜다 !")
+        # if self.RightGoing :
+        #     self.x = min(800 , self.x + self.speed)
+        #     print("오른 걷기")
+        # elif self.LeftGoing:
+        #     self.x = max(0 , self.x - self.speed)
+        #     print("왼 걷기")
+        # if self.Upgoing == True :
+        #     self.y = min(600 , self.y + self.speed)
+        #     print("윗 걷기")
+        # elif self.DownGoing == True and self.state == self.RIGHT_WALK:
+        #     self.y = max(0 , self.y - self.speed)
+        #     print("아랫 걷기")
 
         if self.state == self.RIGHT_SHOT or self.state == self.LEFT_SHOT:
             pass
