@@ -8,7 +8,7 @@ class Background:
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
     def __init__(self):
-        self.image = load_image('background2.png')
+        self.image = load_image('Stage/StageBack/background.png')
         self.x = [275] * 3
         self.y = [365, 1095, 1825]
 

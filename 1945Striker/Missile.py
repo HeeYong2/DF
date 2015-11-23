@@ -35,7 +35,7 @@ class Missile:
         if Missile.image[0] == None:
             Missile.image[0] = load_image('Stage/Bullet/Player_Bullet.png')
         if Missile.image[1] == None:
-            Missile.image[1] = load_image('enemy_missile1.png')
+            Missile.image[1] = load_image('Stage/Bullet/enemy_missile1.png')
 
     def update(self, frame_time):
         for i in range (0, SHOT_MAX):

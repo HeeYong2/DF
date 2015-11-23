@@ -10,8 +10,8 @@ choice = 0
 
 def enter():
     global image
-    image[0] = load_image('choice_plane1.png')
-    image[1] = load_image('choice_plane2.png')
+    image[0] = load_image('Stage/logo/choice_plane2.png')
+    image[1] = load_image('Stage/logo/choice_plane2.png')
 
 def exit():
     global image

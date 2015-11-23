@@ -34,13 +34,12 @@ class Enemy:
         self.e1_body_w, self.e1_body_h = 16, 62
 
         if Enemy.image == None:
-            Enemy.image = load_image('enemy_1.png')
+            Enemy.image = load_image('Stage/Monster/enemy_1.png')
 
     def update(self, frame_time, missile):
         self.end_respone_time = time.time()
         #print("start_respone_time : %d  end_respone_time : %d" %(self.start_respone_time, self.end_respone_time))
         for i in range (0, ENEMY_MAX):
-
 
             if self.live_flag[i] == 1:
                 #print("start_shot_time : %d  end_shot_time : %d i = %d" %(self.start_shot_time[i], self.end_shot_time[i], i))
@@ -60,10 +59,6 @@ class Enemy:
             if self.end_respone_time - self.start_respone_time_E1_THREE >= 5:
                 self.create_enemy_three()
                 self.start_respone_time_E1_THREE = self.end_respone_time
-
-
-
-
 
     def draw(self, frame_time):
         for i in range (0, ENEMY_MAX):
@@ -100,4 +95,3 @@ class Enemy:
         for num in range(0, ENEMY_MAX):
             draw_rectangle(*self.get_bb(num, self.E1_WING))
             draw_rectangle(*self.get_bb(num, self.E1_BODY))
-

@@ -29,7 +29,7 @@ class Item:
         self.movetime1 = [time.time()] * ITEM_MAX
 
         if Item.image == None:
-            Item.image = load_image('power_item.png')
+            Item.image = load_image('Stage/Item/power_item.png')
 
 
     def draw(self, frame_time):
@@ -75,8 +75,6 @@ class Item:
                 self.y[num] += Item.RUN_SPEED_PPS * frame_time
             elif self.dir_y[num] == 1:
                 self.y[num] -= Item.RUN_SPEED_PPS * frame_time
-
-
 
     def get_bb(self, num, type):
         return self.x[num] - 20, self.y[num] - 13, self.x[num] + 20 , self.y[num] + 13

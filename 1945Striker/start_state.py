@@ -4,13 +4,12 @@ from pico2d import *
 
 name = "IntroState"
 image = None
-intro_time = 0.0
+start_time = 0.0
 
 def enter():
     global image
     open_canvas(550, 730)
-    image = load_image('intro.png')
-
+    image = load_image('Stage/logo/logo.png')
 
 def exit():
     global image
@@ -18,13 +17,13 @@ def exit():
     close_canvas()
 
 def update(frame_time):
-    global intro_time
+    global start_time
 
-    if (intro_time > 2.0):
+    if (start_time > 2.0):
         intro_time = 0
         #game_framework.quit()
         game_framework.push_state(SelectCraft)
-    intro_time += frame_time
+    start_time += frame_time
 
 def draw(frame_time):
     global image
@@ -37,7 +36,3 @@ def handle_events(frame_time):
 
 def pause(): pass
 def resume(): pass
-
-
-
-

@@ -22,7 +22,7 @@ class Bomb:
         self.use_flag = 0
 
         if Bomb.image == None:
-            Bomb.image = load_image('bomb_ani.png')
+            Bomb.image = load_image('Stage/Bomb/bomb_ani.png')
 
     def update(self, frame_time):
         if self.use_flag == 1:

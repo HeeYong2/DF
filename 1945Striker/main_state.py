@@ -61,17 +61,20 @@ def handle_events(frame_time):
         else:
             aircraft.handle_event(event, missile, bomb)
 
-def check_collision(a, b, a_num , b_num, a_type, b_type):
+def collide(a, b, a_num , b_num, a_type, b_type):
     left_a, bottom_a, right_a, top_a = a.get_bb(a_num, a_type)
     left_b, bottom_b, right_b, top_b = b.get_bb(b_num, b_type)
 
-    if left_a > right_b: return False
-    if right_a < left_b: return False
-    if top_a < bottom_b: return False
-    if bottom_a > top_b: return False
+    if left_a > right_b:
+        return False
+    if right_a < left_b:
+        return False
+    if top_a < bottom_b:
+        return False
+    if bottom_a > top_b:
+        return False
 
     return True
-
 
 def update(frame_time):
     global background, aircraft, missile, enemy, bomb, item
@@ -84,48 +87,47 @@ def update(frame_time):
     item.update(frame_time)
 
     for i in range(0, 200):
-        if missile.use_flag[i] ==0:
+        if missile.use_flag[i] == 0:
             continue
 
-        if missile.type[i] == 3 or missile.type[i] == 4 or missile.type[i] == 5:                        # hero to enemymissile
-            if check_collision(aircraft, missile, 0, i, 0, missile.type[i]):
-                aircraft.x = 10
-                aircraft.y = 10
-            if check_collision(bomb, missile, 0, i, 0, missile.type[i]):                               #bomb to enemymissile
+        if missile.type[i] == 3 or missile.type[i] == 4 or missile.type[i] == 5:
+            if collide(aircraft, missile, 0, i, 0, missile.type[i]):
+                aircraft.x = 300
+                aircraft.y = 20
+            if collide(bomb, missile, 0, i, 0, missile.type[i]):
                 missile.use_flag[i] = 0
                 missile.x[i] = -500
                 missile.y[i] = -500
-        elif missile.type[i] == 0 or missile.type[i] == 1 or missile.type[i] == 2:                      #enemy to heromissile
+        elif missile.type[i] == 0 or missile.type[i] == 1 or missile.type[i] == 2:
             for e_num in range(0, 50):
                 if enemy.live_flag[e_num] == 0:
                     continue
 
-                if check_collision(enemy, missile, e_num, i, 0, missile.type[i]):   #enemywing
+                if collide(enemy, missile, e_num, i, 0, missile.type[i]):
                     item.create_item(enemy.x[e_num], enemy.y[e_num])
                     enemy.x[e_num] = -300
                     enemy.y[e_num] = -300
                     enemy.live_flag[e_num] = 0
-                if check_collision(enemy, missile, e_num, i, 1, missile.type[i]):   #enemybody
+                if collide(enemy, missile, e_num, i, 1, missile.type[i]):
                     item.create_item(enemy.x[e_num], enemy.y[e_num])
                     enemy.x[e_num] = -300
                     enemy.y[e_num] = -300
                     enemy.live_flag[e_num] = 0
 
-    for e_num in range(50):                   #enemy to aircraftbomb
+    for e_num in range(50):
         if enemy.live_flag[e_num] == 0:
             continue
 
-        if check_collision(enemy, bomb, e_num, 0, 0, 0):
+        if collide(enemy, bomb, e_num, 0, 0, 0):
             item.create_item(enemy.x[e_num], enemy.y[e_num])
             enemy.x[e_num] = -300
             enemy.y[e_num] = -300
             enemy.live_flag[e_num] = 0
-        if check_collision(enemy, bomb, e_num, 0, 1, 0):
+        if collide(enemy, bomb, e_num, 0, 1, 0):
             item.create_item(enemy.x[e_num], enemy.y[e_num])
             enemy.x[e_num] = -300
             enemy.y[e_num] = -300
             enemy.live_flag[e_num] = 0
-
 
 def draw(frame_time):
     global background, aircraft, missile, enemy, bomb, item

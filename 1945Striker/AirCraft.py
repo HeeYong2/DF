@@ -16,7 +16,7 @@ class AirCraft:
     LEFT, RIGHT, IDLE, BOMB1, BOMB2 = 0, 1, 2, 3, 4
 
     def __init__(self):
-        self.x, self.y= 275, 20
+        self.x, self.y = 300, 30
         self.w = 17
         self.h = 62
         self.frame = [3, 0, 0]
@@ -24,11 +24,11 @@ class AirCraft:
         self.up, self.down, self.left, self.right = False, False, False, False
 
         if AirCraft.image[0] == None:
-            AirCraft.image[0] = load_image('hero_move.png')
+            AirCraft.image[0] = load_image('Stage/Player/hero_move.png')
         if AirCraft.image[1] == None:
-            AirCraft.image[1] = load_image('hero_bomb_1.png')
+            AirCraft.image[1] = load_image('Stage/Bomb/hero_bomb_1.png')
         if AirCraft.image[2] == None:
-            AirCraft.image[2] = load_image('hero_bomb_2.png')
+            AirCraft.image[2] = load_image('Stage/Bomb/hero_bomb_2.png')
 
     def update(self, frame_time, missile):
         self.handle_state[self.state](self, frame_time)
@@ -88,10 +88,8 @@ class AirCraft:
             self.frame[2] = 23
             self.state = self.IDLE
 
-
-
     def get_bb(self, num, type):
-        return self.x - self.w/2, self.y - self.h/2, self.x + self.w/2, self.y + self.h/2
+        return self.x - self.w / 2, self.y - self.h / 2, self.x + self.w / 2, self.y + self.h / 2
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb(0,0))
@@ -135,4 +133,3 @@ class AirCraft:
                 BOMB1 : handle_bomb1,
                 BOMB2 : handle_bomb2
     }
-
