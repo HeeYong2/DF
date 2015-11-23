@@ -1,3 +1,5 @@
+__author__ = 'HeeYong'
+
 from pico2d import*
 import random
 import time
@@ -38,11 +40,9 @@ class Enemy:
 
     def update(self, frame_time, missile):
         self.end_respone_time = time.time()
-        #print("start_respone_time : %d  end_respone_time : %d" %(self.start_respone_time, self.end_respone_time))
         for i in range (0, ENEMY_MAX):
 
             if self.live_flag[i] == 1:
-                #print("start_shot_time : %d  end_shot_time : %d i = %d" %(self.start_shot_time[i], self.end_shot_time[i], i))
                 self.y[i] -= Enemy.RUN_SPEED_PPS * frame_time
                 self.end_shot_time[i] = time.time()
                 if self.end_shot_time[i] - self.start_shot_time[i] >=3:
@@ -63,7 +63,6 @@ class Enemy:
     def draw(self, frame_time):
         for i in range (0, ENEMY_MAX):
             self.image.rotate_draw(3.1, self.x[i], self.y[i])
-        #self.image.clip_draw(0, 0, 88, 64, self.x, self.y)
         self.draw_bb()
 
     def create_enemy(self):
@@ -80,7 +79,7 @@ class Enemy:
             for i in range (0, ENEMY_MAX):
                 if self.live_flag[i] == 0:
                     self.live_flag[i] = 1
-                    self.x[i] = 80*num + 20
+                    self.x[i] = 80 * num + 20
                     self.y[i] = 730
                     self.patter_type[i] = self.E1_THREE
                     break

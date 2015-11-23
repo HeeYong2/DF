@@ -1,3 +1,5 @@
+__author__ = 'HeeYong'
+
 from pico2d import*
 
 SHOT_MAX = 200

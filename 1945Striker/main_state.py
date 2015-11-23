@@ -1,3 +1,4 @@
+__author__ = 'HeeYong'
 
 import random
 import json
@@ -98,9 +99,9 @@ def update(frame_time):
             continue
 
         if missile.type[i] == 3 or missile.type[i] == 4 or missile.type[i] == 5:
-            if collide(aircraft, missile, 0, i, 0, missile.type[i]):
-                aircraft.x = 300
-                aircraft.y = 20
+            # if collide(aircraft, missile, 0, i, 0, missile.type[i]):              #플레이어와 에너미사일 충돌
+            #     aircraft.x = 300
+            #     aircraft.y = 20
             if collide(bomb, missile, 0, i, 0, missile.type[i]):
                 missile.use_flag[i] = 0
                 missile.x[i] = -500

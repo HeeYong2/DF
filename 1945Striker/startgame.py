@@ -1,3 +1,5 @@
+__author__ = 'HeeYong'
+
 import game_framework
 import start_state
 

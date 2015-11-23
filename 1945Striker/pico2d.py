@@ -1,3 +1,5 @@
+__author__ = 'HeeYong'
+
 import sys
 import types
 import ctypes

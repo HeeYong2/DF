@@ -1,3 +1,5 @@
+__author__ = 'HeeYong'
+
 from pico2d import*
 import random
 import time
@@ -47,7 +49,6 @@ class Item:
 
             self.totalframe[num] += Item.FRAMES_PER_ACTION_ITEM * Item.ACTION_PER_TIME * frame_time
             self.frame[num] = int(self.totalframe[num]) % 6
-
 
     def create_item(self, x, y):
         for num in range(ITEM_MAX):

@@ -1,8 +1,10 @@
+__author__ = 'HeeYong'
+
 import game_framework
 import SelectCraft
 from pico2d import *
 
-name = "IntroState"
+name = "StartState"
 image = None
 start_time = 0.0
 
@@ -21,7 +23,6 @@ def update(frame_time):
 
     if (start_time > 2.0):
         start_time = 0
-        #game_framework.quit()
         game_framework.push_state(SelectCraft)
     start_time += frame_time
 
