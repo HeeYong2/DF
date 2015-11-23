@@ -4,7 +4,7 @@ from pico2d import*
 import random
 import time
 
-ITEM_MAX = 10
+ITEM_MAX = 2
 
 class Item:
     PIXEL_PER_METER = (10.0 / 0.9)           # 10 pixel 30 cm

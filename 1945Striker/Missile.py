@@ -39,21 +39,22 @@ class Missile:
         if Missile.image[1] == None:
             Missile.image[1] = load_image('Stage/Bullet/enemy_missile1.png')
 
+        print(self.x , self.y)
     def update(self, frame_time):
         for i in range (0, SHOT_MAX):
             if self.use_flag[i] == 0:
                 continue
 
-            if self.type[i] == self.H_SHOT and self.use_flag[i] == 1:                                              #hero middle shot
+            if self.type[i] == self.H_SHOT and self.use_flag[i] == 1:                                              #airplane middle shot
                 self.totalframe[i] += Missile.FRAMES_PER_ACTION_H_SHOT * Missile.ACTION_PER_TIME * frame_time
                 self.frame[i] = int(self.totalframe[i]) % 2
                 self.y[i] += Missile.RUN_SPEED_PPS * frame_time * Missile.HERO_MISSILE_SPEED
-            elif self.type[i] == self.H_L_SHOT and self.use_flag[i] == 1:                                           #hero left shot
+            elif self.type[i] == self.H_L_SHOT and self.use_flag[i] == 1:                                           #airplane left shot
                 self.totalframe[i] += Missile.FRAMES_PER_ACTION_H_SHOT * Missile.ACTION_PER_TIME * frame_time
                 self.frame[i] = int(self.totalframe[i]) % 2
                 self.y[i] += Missile.RUN_SPEED_PPS * frame_time * Missile.HERO_MISSILE_SPEED
                 self.x[i] -= Missile.RUN_SPEED_PPS * frame_time * Missile.HERO_MISSILE_SPEED / 2
-            elif self.type[i] == self.H_R_SHOT and self.use_flag[i] == 1:                                           #hero right shot
+            elif self.type[i] == self.H_R_SHOT and self.use_flag[i] == 1:                                           #airplane right shot
                 self.totalframe[i] += Missile.FRAMES_PER_ACTION_H_SHOT * Missile.ACTION_PER_TIME * frame_time
                 self.frame[i] = int(self.totalframe[i]) % 2
                 self.y[i] += Missile.RUN_SPEED_PPS * frame_time * Missile.HERO_MISSILE_SPEED

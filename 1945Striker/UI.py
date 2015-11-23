@@ -4,7 +4,7 @@ from pico2d import *
 
 class Credit:                                               #오른쪽 아래 Credit
     def __init__(self):
-        self.x , self.y = 440 , 30
+        self.x , self.y = 440 , 53
         self.image = load_image('Stage/UI/Credit.png')
 
     def draw(self , frame_time):
@@ -27,6 +27,18 @@ class LifeUI:                                               #오른쪽 아래 Cr
 
     def draw(self , frame_time):
         self.LifeImage.clip_draw(0, 195, 96, 100, self.x, self.y)
+
+class PowerUI:                                               #왼쪽 아래 Credit
+    PowerBarImage = None
+    def __init__(self):
+        self.x , self.y = 160 , 60
+        self.PowerBarImage = load_image('Stage/UI/Power_bar1.png')
+
+    def draw(self , frame_time):
+        self.PowerBarImage.draw(self.x , self.y)
+
+    # def update(self , frame_time):
+    #     pass
 
 class PushStart:                                            #오른쪽 위 푸쉬 스테이트
     pushimage = None

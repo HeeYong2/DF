@@ -25,7 +25,7 @@ bomb = None
 item = None
 
 def enter():
-    global aircraft, missile, enemy, background, font, bomb, item , credit , pushstart ,lifeui , stageoneui
+    global aircraft, missile, enemy, background, font, bomb, item , credit , pushstart ,lifeui , stageoneui , powerbarui
     aircraft = AirCraft()
     missile = Missile()
     enemy = Enemy()
@@ -36,9 +36,10 @@ def enter():
     pushstart = PushStart()
     lifeui = LifeUI()
     stageoneui = StageOneUI()
+    powerbarui = PowerUI()
 
 def exit():
-    global aircraft, missile, enemy, background, font, bomb, item , credit , pushstart , stageoneui , lifeui
+    global aircraft, missile, enemy, background, font, bomb, item , credit , pushstart , stageoneui , lifeui , powerbarui
 
     del(lifeui)
     del(stageoneui)
@@ -51,6 +52,7 @@ def exit():
     del(font)
     del(bomb)
     del(item)
+    del(powerbarui)
 
 def pause():
     pass
@@ -84,7 +86,7 @@ def collide(a, b, a_num , b_num, a_type, b_type):
     return True
 
 def update(frame_time):
-    global background, aircraft, missile, enemy, bomb, item , pushstart
+    global background, aircraft, missile, enemy, bomb, item , pushstart , powerbar
 
     background.update(frame_time)
     aircraft.update(frame_time, missile)
@@ -93,6 +95,7 @@ def update(frame_time):
     bomb.update(frame_time)
     item.update(frame_time)
     pushstart.update(frame_time)
+    #powerbar.update(frame_time)
 
     for i in range(0, 200):
         if missile.use_flag[i] == 0:
@@ -151,5 +154,5 @@ def draw(frame_time):
     pushstart.draw(frame_time)
     stageoneui.draw(frame_time)
     lifeui.draw(frame_time)
-
+    powerbarui.draw(frame_time)
     update_canvas()
