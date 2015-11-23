@@ -20,7 +20,7 @@ def update(frame_time):
     global start_time
 
     if (start_time > 2.0):
-        intro_time = 0
+        start_time = 0
         #game_framework.quit()
         game_framework.push_state(SelectCraft)
     start_time += frame_time

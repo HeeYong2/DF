@@ -87,9 +87,9 @@ class Enemy:
 
     def get_bb(self, num, type):
         if type == self.E1_WING:
-            return self.x[num] - self.e1_wing_w/2, self.y[num] - self.e1_wing_h/2, self.x[num] + self.e1_wing_w/2, self.y[num] + self.e1_wing_h/2
+            return self.x[num] - self.e1_wing_w / 2, self.y[num] - self.e1_wing_h / 2, self.x[num] + self.e1_wing_w / 2, self.y[num] + self.e1_wing_h / 2
         elif type == self.E1_BODY:
-            return self.x[num] - self.e1_body_w/2, self.y[num] - self.e1_body_h/2, self.x[num] + self.e1_body_w/2, self.y[num] + self.e1_body_h/2
+            return self.x[num] - self.e1_body_w / 2, self.y[num] - self.e1_body_h / 2, self.x[num] + self.e1_body_w / 2, self.y[num] + self.e1_body_h / 2
 
     def draw_bb(self):
         for num in range(0, ENEMY_MAX):
