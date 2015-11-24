@@ -10,7 +10,7 @@ start_time = 0.0
 
 def enter():
     global image
-    open_canvas(550, 730)
+    open_canvas(550, 680)
     image = load_image('Stage/logo/logo.png')
 
 def exit():

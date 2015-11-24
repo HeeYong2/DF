@@ -13,7 +13,7 @@ class Credit:                                               #오른쪽 아래 Cr
 class StageOneUI:                                               #오른쪽 아래 Credit
     StageOneImage = None
     def __init__(self):
-        self.x , self.y = 150 , 660
+        self.x , self.y = 150 , 610
         self.StageOneImage = load_image('Stage/UI/Status_Top.png')
 
     def draw(self , frame_time):
@@ -22,7 +22,7 @@ class StageOneUI:                                               #오른쪽 아�
 class LifeUI:                                               #오른쪽 아래 Credit
     LifeImage = None
     def __init__(self):
-        self.x , self.y = 80 , 680
+        self.x , self.y = 80 , 630
         self.LifeImage = load_image('Stage/UI/Status_Top.png')
 
     def draw(self , frame_time):
@@ -45,7 +45,7 @@ class PushStart:                                            #오른쪽 위 푸�
     pushCnt = 0
     YHeight = 210
     def __init__(self):
-        self.x , self.y = 400 , 680
+        self.x , self.y = 400 , 630
         self.frame = 5
         self.state = 0
         if PushStart.pushimage == None:
