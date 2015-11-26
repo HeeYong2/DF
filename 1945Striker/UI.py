@@ -63,3 +63,6 @@ class PushStart:                                            #오른쪽 위 푸�
 
     def draw(self , frame_time):
         self.pushimage.clip_draw(500, self.YHeight, 280, 70, self.x, self.y)
+
+class AnyWay:
+    pass
