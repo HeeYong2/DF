@@ -12,7 +12,7 @@ class AirCraft:
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     FRAMES_PER_ACTION = [7, 23, 24]
-    ##
+    ####
     image = [None] * 3
 
     LEFT, RIGHT, IDLE, BOMB1, BOMB2 = 0, 1, 2, 3, 4
