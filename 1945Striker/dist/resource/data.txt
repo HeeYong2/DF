@@ -1,0 +1,85 @@
+{
+	"Hero" : {
+	"x":275, "y":20, "w":17, "h":62, 
+	"up":"False", "down":"False", "left":"False", "right":"False",    		  				"StateLeft":0, "StateRight":1, "StateIdle":2, "StateBomb1":3, "StateBomb2":4,
+	"totalframe1":3, "totalframe2":0, "totalframe3":0,
+	"image_num":3,
+	"PIXEL_PER_METER":33.33333, "RUN_SPEED_KMPH":20.0, "TIME_PER_ACTION":0.5,
+	"FRAMES_PER_ACTION_HERO":7, "FRAMES_PER_ACTION_BOMB1":23, "FRAMES_PER_ACTION_BOMB2":24,
+	"image0_w":62, "image0_h":80, "image1_w":192, "image1_h":286, "image2_w":192, "image2_h":286
+	
+	},
+
+	"BackGround" : {
+	"w":550, "h":730, "bottom":0, "left":0, "right":550, "top":730,
+	"background_speed": 2
+
+	},
+
+
+	"Enemy" : {
+	"ENEMY_MAX":50, "hp":5,
+	"PIXEL_PER_METER":12.5, "RUN_SPEED_KMPH":20.0, "TIME_PER_ACTION":0.5,
+	"FRAMES_PER_ACTION":8, 
+	"E1_WING":0, "E1_BODY":1, "E2_WING":2, "E2_BODY":3, "E3_WING":4, "E3_BODY":5,
+	"E2_ONE":0, "E1_THREE":1,
+	"x":0, "y":0, "live_flag":0, 
+	"type":"None", "e1_type": 1, "e2_type": 2, "e3_type": 3, "pattern_type":0,
+	"e1_wing_w":80, "e1_wing_h":14, "e1_body_w":16, "e1_body_h":62,
+	"e2_wing_w":42, "e2_wing_h":10, "e2_body_w":17, "e2_body_h":62,
+	"e3_wing_w":38, "e3_wing_h":20, "e3_body_w":10, "e3_body_h":62,
+	"e1_speed":1, "e2_speed":3, "e3_speed":2, "missile_respone_time2":3,
+	"missile_respone_time1":1, "E2_ONE_respone_time":7, "E1_THREE_respone_time":5, 					"E3_TWO_respone_time":3,"dir_right":0, "dir_left": 1, 
+	"respone_interval":50, "threeplane_w":240, "plane_w":80,
+	"score" : 50, "0": 0
+	},
+
+
+	"Missile" :{
+	"MISSILE_MAX":200, "image_num":5,
+	"PIXEL_PER_METER":50, "RUN_SPEED_KMPH":20.0, "TIME_PER_ACTION":0.5,
+	"FRAMES_PER_ACTION_H_SHOT":2, "FRAMES_PER_ACTION_E_SHOT":3, "HERO_MISSILE_SPEED":5,
+	"UDO_X_SPEED":2,"HERO_X_SPEED":15, "ENEMY_X_SPEED":2,
+	"x":0, "y":0, "frame":0, "totalframe":0, "use_flag":0, "type":0, "power":0,
+	"enemy_missile_w":14, "enemy_missile_h":14, "hero_missile_w":6, "hero_missile_h":42,
+	"hero_missile_image_w":32, "hero_missile_image_h":96, "enemy_missile_image_wh":16
+	},
+
+
+	"Bomb" :{
+	"PIXEL_PER_METER":50, "RUN_SPEED_KMPH":20.0, "TIME_PER_ACTION":0.95,
+	"FRAMES_PER_ACTION_BOMB":8, "HERO_BOMB_SPEED":2,
+	"x":0, "y":0, "frame":0, "totalframe":0, "use_flag":0,
+	"bomb_image_w":192, "bomb_image_h":272, "use_number" : 3, "power":100
+	},
+
+
+	"Item" : {
+	"ITEM_MAX":5,
+	"PIXEL_PER_METER":11.11111, "RUN_SPEED_KMPH":20.0, "TIME_PER_ACTION":0.95,
+	"FRAMES_PER_ACTION_ITEM":6, "ITEM_SPEED":2,
+	"x":0, "y":0, "frame":0, "totalframe":0, "use_flag":0, "dir_x":0, "dir_y":0,
+	"item_image_w":40, "item_image_h":26, "item_move_time":3
+	},
+
+
+	"Effect": {
+	"EFFECT_MAX":50,
+	"TIME_PER_ACTION":0.95, "FRAMES_PER_ACTION_HIT":17, "FRAMES_PER_ACTION_DEATH":15,
+	"image_num":2, "x":0, "y":0, "frame":0, "totalframe":0, "use_flag":0, "type":0,
+	"effect_hit_image_w":32, "effect_hit_image_h":96, "effect_death_image_wh":128,
+	"effect_hit_range":64
+	},
+
+	"Boss":{
+	"PIXEL_PER_METER":10, "RUN_SPEED_KMPH":20,"hp":1000,
+	"x":0, "y":0, "live_flag":0, "boss_respone_time":40,
+	"b_wing":0, "b_body":1, "b_wing_w":351, "b_wing_h":40, "b_body_w":130, "b_body_h":363,
+	"b_wing1/4": 87.75, "score":1000, "0":0
+	},
+
+
+	"Public":{
+	"intro_time":2
+	}
+}

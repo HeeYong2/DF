@@ -11,7 +11,6 @@ from sdl2.sdlmixer import *
 
 
 lattice_on = True
-audio_on = False
 
 
 def clamp(minimum, x, maximum):
@@ -35,7 +34,6 @@ def open_canvas(w=int(800), h=int(600), sync=False):
     global window, renderer
     global canvas_width, canvas_height
     global debug_font
-    global audio_on
 
     canvas_width, canvas_height = w, h
 
@@ -46,15 +44,9 @@ def open_canvas(w=int(800), h=int(600), sync=False):
 
 
     Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG)
-
-    ret = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)
-    if -1 == ret:
-        print('WARNING: Audio functions are disabled due to speaker or sound problems')
-
-
-    if audio_on:
-        Mix_Volume(-1, 128)
-        Mix_VolumeMusic(128)
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)
+    Mix_Volume(-1, 128)
+    Mix_VolumeMusic(128)
 
 
     #SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 0);
@@ -65,10 +57,6 @@ def open_canvas(w=int(800), h=int(600), sync=False):
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
     else:
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)
-
-    if renderer is None:
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE)
-
     #SDL_ShowCursor(SDL_DISABLE)
 
 
@@ -93,11 +81,10 @@ def hide_lattice():
     update_canvas()
 
 def close_canvas():
-    if audio_on:
-        Mix_HaltMusic()
-        Mix_HaltChannel(-1)
-        Mix_CloseAudio()
-        Mix_Quit()
+    Mix_HaltMusic()
+    Mix_HaltChannel(-1)
+    Mix_CloseAudio()
+    Mix_Quit()
     TTF_Quit()
     IMG_Quit()
     SDL_DestroyRenderer(renderer)
@@ -206,22 +193,11 @@ class Image:
         SDL_DestroyTexture(self.texture)
 
     def rotate_draw(self, rad, x, y, w = None, h = None):
-        """Rotate(in radian unit) and draw image to back buffer, center of rotation is the image center"""
+        """Rotate(in radian unit) and draw image to back buffer"""
         if w == None and h == None:
             w,h = self.w, self.h
         rect = to_sdl_rect(x-w/2, y-h/2, w, h)
-        SDL_RenderCopyEx(renderer, self.texture, None, rect, math.degrees(-rad), None, SDL_FLIP_NONE)
-
-    def composite_draw(self, rad, flip, x, y, w = None, h = None):
-        if w is None and h is None:
-            w,h = self.w, self.h
-        rect = to_sdl_rect(x-w/2, y-h/2, w, h)
-        flip_flag = SDL_FLIP_NONE
-        if 'h' in flip:
-            flip_flag |= SDL_FLIP_HORIZONTAL
-        if 'v' in flip:
-            flip_flag |= SDL_FLIP_VERTICAL
-        SDL_RenderCopyEx(renderer, self.texture, None, rect, math.degrees(-rad), None, flip_flag)
+        SDL_RenderCopyEx(renderer, self.texture, None, rect, math.degrees(-rad), None, SDL_FLIP_NONE);
 
     def draw(self, x, y, w=None, h=None):
         """Draw image to back buffer"""
@@ -247,17 +223,6 @@ class Image:
         dest_rect = to_sdl_rect(x-w/2, y-h/2, w, h)
         SDL_RenderCopy(renderer, self.texture, src_rect, dest_rect)
 
-    def clip_composite_draw(self, left, bottom, width, height, rad, flip, x, y, w = None, h = None):
-        if w is None and h is None:
-            w,h = self.w, self.h
-        src_rect = SDL_Rect(left, self.h - bottom - height, width, height)
-        dst_rect = to_sdl_rect(x-w/2, y-h/2, w, h)
-        flip_flag = SDL_FLIP_NONE
-        if 'h' in flip:
-            flip_flag |= SDL_FLIP_HORIZONTAL
-        if 'v' in flip:
-            flip_flag |= SDL_FLIP_VERTICAL
-        SDL_RenderCopyEx(renderer, self.texture, src_rect, dst_rect, math.degrees(-rad), None, flip_flag)
 
     def clip_draw_to_origin(self, left, bottom, width, height, x, y, w=None, h=None):
         """Clip a rectangle from image and draw"""
@@ -285,7 +250,6 @@ class Image:
     def opacify(self, o):
         SDL_SetTextureAlphaMod(self.texture, int(o*255.0))
 
-
 def load_image(name):
     texture = IMG_LoadTexture(renderer, name.encode('UTF-8'))
     if (not texture):
@@ -304,7 +268,17 @@ class Font:
     def draw(self, x, y, str, color=(0,0,0)):
         sdl_color = SDL_Color(color[0], color[1], color[2])
         #print(str)
-        surface = TTF_RenderUTF8_Blended(self.font, str.encode('utf-8'), sdl_color)
+        surface = TTF_RenderText_Blended(self.font, str.encode('utf-8'), sdl_color)
+        texture = SDL_CreateTextureFromSurface(renderer, surface)
+        SDL_FreeSurface(surface)
+        image = Image(texture)
+        image.draw(x+image.w/2, y)
+
+
+    # unicode rendering not working well at the moment, needs to modify
+    def draw_unicode(self, x, y, str, color=(0,0,0)):
+        sdl_color = SDL_Color(color[0], color[1], color[2])
+        surface = TTF_RenderUNICODE_Blended(self.font, ctypes.cast(str.encode('utf-16'), ctypes.POINTER(ctypes.c_uint16)), sdl_color)
         texture = SDL_CreateTextureFromSurface(renderer, surface)
         SDL_FreeSurface(surface)
         image = Image(texture)
@@ -373,29 +347,21 @@ class Wav:
 
 
 def load_music(name):
-    if audio_on:
-        data = Mix_LoadMUS(name.encode('UTF-8'))
-        if (not data):
-            print('cannot load %s' % name)
-            raise IOError
-
-        return Music(data)
-    else:
-        print('audio fuctions cannot work due to sound or speaker problems')
+    data = Mix_LoadMUS(name.encode('UTF-8'))
+    if (not data):
+        print('cannot load %s' % name)
         raise IOError
+
+    return Music(data)
 
 
 def load_wav(name):
-    if audio_on:
-        data = Mix_LoadWAV(name.encode('UTF-8'))
-        if (not data):
-            print('cannot load %s' % name)
-            raise IOError
-
-        return Wav(data)
-    else:
-        print('audio functions cannot work due to sound or speaker problems')
+    data = Mix_LoadWAV(name.encode('UTF-8'))
+    if (not data):
+        print('cannot load %s' % name)
         raise IOError
+
+    return Wav(data)
 
 
 
@@ -411,7 +377,7 @@ def test_pico2d():
     print('done')
 
 
-print("Pico2d is prepared.")
+#print("Pico2d is prepared.")
 if __name__ == "__main__":
     test_pico2d()
 
