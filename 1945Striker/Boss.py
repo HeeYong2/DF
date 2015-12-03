@@ -31,7 +31,7 @@ class Boss:
 
         if Boss.image == None:
             Boss.image = load_image('Boss.png')
-
+#
 
     def update(self, frame_time, missile, score, background):
         self.end_time = time.time()
