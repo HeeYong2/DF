@@ -1,5 +1,5 @@
 import game_framework
-import choice_plane_state
+import SelectCraft
 from pico2d import *
 import json
 
@@ -30,7 +30,7 @@ def update(frame_time):
     if (intro_time > data['Public']['intro_time']):
         intro_time = 0
         #game_framework.quit()
-        game_framework.push_state(choice_plane_state)
+        game_framework.push_state(SelectCraft)
     intro_time += frame_time
 
 def draw(frame_time):

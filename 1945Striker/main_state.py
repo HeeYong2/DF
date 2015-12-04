@@ -4,7 +4,7 @@ import os
 
 from Missile import*
 from Enemy import*
-from Hero import*
+from AirCraft import*
 from Background import*
 from Bomb import*
 from Item import*
@@ -14,7 +14,7 @@ from Boss import*
 from pico2d import *
 
 import game_framework
-import intro_state
+import start_state
 import ranking_state
 
 
@@ -50,8 +50,8 @@ def enter():
     font = load_font('ENCR10B.TTF', 30)
 
     if get_item_sound == None:
-            get_item_sound = load_wav('get_item.wav')
-            get_item_sound.set_volume(100)
+        get_item_sound = load_wav('get_item.wav')
+        get_item_sound.set_volume(100)
 
 def exit():
     global hero, missile, enemy, background, font, bomb, item, effect, boss
@@ -81,7 +81,7 @@ def handle_events(frame_time):
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             #running = False
-            game_framework.change_state(intro_state)
+            game_framework.change_state(start_state)
         else:
             hero.handle_event(event, missile, bomb)
 
@@ -89,13 +89,16 @@ def check_collision(a, b, a_num , b_num, a_type, b_type):
     left_a, bottom_a, right_a, top_a = a.get_bb(a_num, a_type)
     left_b, bottom_b, right_b, top_b = b.get_bb(b_num, b_type)
 
-    if left_a > right_b: return False
-    if right_a < left_b: return False
-    if top_a < bottom_b: return False
-    if bottom_a > top_b: return False
+    if left_a > right_b:
+        return False
+    if right_a < left_b:
+        return False
+    if top_a < bottom_b:
+        return False
+    if bottom_a > top_b:
+        return False
 
     return True
-
 
 def update(frame_time):
     global background, hero, missile, enemy, bomb, item, effect, boss, score
@@ -111,7 +114,7 @@ def update(frame_time):
 
 
     for i in range(0, data['Missile']['MISSILE_MAX']):
-        if missile.use_flag[i] ==0:
+        if missile.use_flag[i] == 0:
             continue
 
         if missile.type[i] == 3 or missile.type[i] == 4 or missile.type[i] == 5 or missile.type[i] == 6:                        # hero to enemymissile

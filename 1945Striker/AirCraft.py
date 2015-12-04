@@ -1,6 +1,6 @@
 from pico2d import*
 import json
-#
+
 
 
 data_file = open('data.txt', 'r')
@@ -110,7 +110,7 @@ class Hero:
         draw_rectangle(*self.get_bb(0,0))
 
     def handle_event(self, event, missile, bomb):
-        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):     #hero missile  = space
+        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_x):     #hero missile  = space
             if missile.power == 0:
                 missile.create_shot(0, self.x, self.y)
                 missile.missile_sound.play()
@@ -126,7 +126,7 @@ class Hero:
                 missile.create_hero_multyshot(self.x, self.y)
                 missile.missile_sound.play()
                 missile.missile_sound.play()
-        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_b):     #hero bomb     = b
+        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_z):     #hero bomb     = b
                 if bomb.get_use_flag() == 0 and bomb.use_number > 0:
                     bomb.create_bomb(self.x, self.y)
                     self.state = self.BOMB1

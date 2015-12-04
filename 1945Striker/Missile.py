@@ -1,6 +1,6 @@
 from pico2d import*
 import json
-
+import math
 
 data_file = open('data.txt', 'r')
 data = json.load(data_file)
@@ -27,8 +27,9 @@ class Missile:
     H_SHOT, H_L_SHOT, H_R_SHOT, E_SHOT, E_L_SHOT, E_R_SHOT, B_UDO_SHOT = 0, 1, 2, 3, 4, 5, 6
 
     def __init__(self):
+        self.Angle = ['Missile'] * MISSILE_MAX
         self.x = [data['Missile']['x']] * MISSILE_MAX
-        self.y= [data['Missile']['y']] * MISSILE_MAX
+        self.y = [data['Missile']['y']] * MISSILE_MAX
         self.frame = [data['Missile']['frame']] * MISSILE_MAX
         self.totalframe = [data['Missile']['totalframe']] * MISSILE_MAX
         self.use_flag = [data['Missile']['use_flag']] * MISSILE_MAX
@@ -88,12 +89,17 @@ class Missile:
                 self.frame[i] = int(self.totalframe[i]) % 3
                 self.y[i] -= Missile.RUN_SPEED_PPS * frame_time
                 self.x[i] += Missile.RUN_SPEED_PPS * frame_time / data['Missile']['ENEMY_X_SPEED']
-            elif self.type[i] == self.B_UDO_SHOT and self.use_flag[i] == 1:
+            elif self.type[i] == self.B_UDO_SHOT and self.use_flag[i] == 1:         #여기가 스토커 짓 하는 곳
                 self.totalframe[i] += Missile.FRAMES_PER_ACTION_E_SHOT * Missile.ACTION_PER_TIME * frame_time
                 self.frame[i] = int(self.totalframe[i]) % 3
-                if hero.x > self.x[i]: self.x[i] += Missile.RUN_SPEED_PPS * frame_time / data['Missile']['UDO_X_SPEED']
-                elif hero.x < self.x[i]: self.x[i] -= Missile.RUN_SPEED_PPS * frame_time / data['Missile']['UDO_X_SPEED']
-                self.y[i] -= Missile.RUN_SPEED_PPS * frame_time
+                # if hero.x > self.x[i]:
+                #     self.x[i] += Missile.RUN_SPEED_PPS * frame_time / data['Missile']['UDO_X_SPEED']
+                # elif hero.x < self.x[i]:
+                #     self.x[i] -= Missile.RUN_SPEED_PPS * frame_time / data['Missile']['UDO_X_SPEED']
+
+                self.y[i] -= math.sin(self.Angle[i] *3.14 /180) * 2
+                self.x[i] += math.cos(self.Angle[i] *3.14/180) * 2
+                #self.y[i] -= Missile.RUN_SPEED_PPS * frame_time
 
         self.destroy_missile()
 
@@ -115,7 +121,7 @@ class Missile:
 
         #self.draw_bb()
 
-    def create_shot(self, type, xDot , yDot ):
+    def create_shot(self, type, xDot , yDot , Angle = 0):
         for i in range (0, MISSILE_MAX):
             if self.use_flag[i] == 0:
                 self.use_flag[i] = 1
@@ -123,6 +129,7 @@ class Missile:
                 self.y[i] = yDot
                 self.totalframe[i] = 0
                 self.type[i] = type
+                self.Angle[i] = Angle
                 break
 
     def create_enemy_multyshot(self, xDot, yDot):
@@ -133,9 +140,9 @@ class Missile:
         for type in range(0, 3):
             self.create_shot(type, xDot, yDot)
 
-    def create_boss_udoshot(self, xDot, yDot):
-        self.create_shot(self.B_UDO_SHOT, xDot, yDot)
-
+    def create_boss_udoshot(self, xDot, yDot , Angle):
+        self.create_shot(self.B_UDO_SHOT, xDot, yDot, Angle )
+        #print(self.Angle)
     def create_boss_multyshot(self, xDot, yDot):
         leftx = xDot - data['Boss']['b_wing1/4']
         rightx = xDot + data['Boss']['b_wing1/4']

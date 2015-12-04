@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import *
 import json
-import choice_plane_state
+import SelectCraft
 
 name = "RankingState"
 image = None
@@ -53,7 +53,7 @@ def handle_events(frame_time):
             game_framework.quit()
         else:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_r):
-                game_framework.change_state(choice_plane_state)
+                game_framework.change_state(SelectCraft)
 
 
 def pause(): pass

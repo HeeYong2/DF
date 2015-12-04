@@ -17,6 +17,7 @@ class Boss:
     image = None
 
     def __init__(self):
+        self.Angle = 0
         self.x = data['Boss']['x']
         self.y = data['Boss']['y']
         self.live_flag = data['Boss']['live_flag']
@@ -54,8 +55,11 @@ class Boss:
                 end_multy_shot_time = time.time()
                 self.y = 550
                 if end_udo_shot_time - self.start_udo_shot_time > 1:
-                    missile.create_boss_udoshot(self.x, self.y)
-                    self.start_udo_shot_time = end_udo_shot_time
+                    for i in range(0 , 70):
+                        self.Angle += 7
+                        print("만들떄의 앵글",self.Angle)
+                        missile.create_boss_udoshot(self.x, self.y , self.Angle)
+                        self.start_udo_shot_time = end_udo_shot_time
                 elif end_multy_shot_time - self.start_multy_shot_time > 2:
                     missile.create_boss_multyshot(self.x, self.y)
                     missile.create_enemy_multyshot(self.x, self.y - data['Boss']['b_body_h']/2)

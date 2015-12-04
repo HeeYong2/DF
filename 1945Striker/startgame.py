@@ -6,6 +6,6 @@ else:
     os.environ["PYSDL2_DLL_PATH"] = "./SDL2/x64"
 
 import game_framework
-import intro_state
+import start_state
 
-game_framework.run(intro_state)
+game_framework.run(start_state)

@@ -1,0 +1,35 @@
+Traceback (most recent call last):
+  File "startgame.py", line 9, in <module>
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2d\DF\1945Striker\intro_state.py", line 2, in <module>
+    import choice_plane_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2d\DF\1945Striker\choice_plane_state.py", line 4, in <module>
+    import main_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2d\DF\1945Striker\main_state.py", line 5, in <module>
+    from Missile import*
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2d\DF\1945Striker\Missile.py", line 5, in <module>
+    data_file = open('data.txt', 'r')
+FileNotFoundError: [Errno 2] No such file or directory: 'data.txt'
