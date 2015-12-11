@@ -55,7 +55,7 @@ class Boss:
                 end_multy_shot_time = time.time()
                 self.y = 550
                 if end_udo_shot_time - self.start_udo_shot_time > 1:
-                    for i in range(0 , 70):
+                    for i in range(0 , 50):
                         self.Angle += 7
                         print("만들떄의 앵글",self.Angle)
                         missile.create_boss_udoshot(self.x, self.y , self.Angle)

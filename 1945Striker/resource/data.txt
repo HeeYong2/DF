@@ -4,7 +4,7 @@
 	"up":"False", "down":"False", "left":"False", "right":"False",    		  				"StateLeft":0, "StateRight":1, "StateIdle":2, "StateBomb1":3, "StateBomb2":4,
 	"totalframe1":3, "totalframe2":0, "totalframe3":0,
 	"image_num":3,
-	"PIXEL_PER_METER":33.33333, "RUN_SPEED_KMPH":20.0, "TIME_PER_ACTION":0.5,
+	"PIXEL_PER_METER":33.33333, "RUN_SPEED_KMPH":30.0, "TIME_PER_ACTION":0.5,
 	"FRAMES_PER_ACTION_HERO":7, "FRAMES_PER_ACTION_BOMB1":23, "FRAMES_PER_ACTION_BOMB2":24,
 	"image0_w":62, "image0_h":80, "image1_w":192, "image1_h":286, "image2_w":192, "image2_h":286
 	
