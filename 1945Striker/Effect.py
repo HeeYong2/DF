@@ -14,7 +14,7 @@ class Effect:
     FRAMES_PER_ACTION_HIT = data['Effect']['FRAMES_PER_ACTION_HIT']
     FRAMES_PER_ACTION_DEATH = data['Effect']['FRAMES_PER_ACTION_DEATH']
 
-    image = [None] * 2
+    image = [None] * 3
 
     def __init__(self):
         self.x = [data['Effect']['x']] * EFFECT_MAX
@@ -28,6 +28,8 @@ class Effect:
             Effect.image[0] = load_image('effect_hit.png')
         if Effect.image[1] == None:
             Effect.image[1] = load_image('effect_death.png')
+        if Effect.image[2] == None:
+            Effect.image[2] = load_image('Effect_Power.png')
 
 
     def update(self, frame_time):
@@ -49,6 +51,13 @@ class Effect:
                     self.totalframe[i] = Effect.FRAMES_PER_ACTION_DEATH
                     self.destroy_effect(i)
 
+            elif self.type[i] == 2:
+                self.totalframe[i] += Effect.ACTION_PER_TIME * Effect.FRAMES_PER_ACTION_HIT * frame_time
+                self.frame[i] = int(self.totalframe[i])
+                if self.totalframe[i] >= Effect.FRAMES_PER_ACTION_HIT:
+                    self.totalframe[i] = Effect.FRAMES_PER_ACTION_HIT
+                    self.destroy_effect(i)
+
 
 
     def draw(self, frame_time):
@@ -60,7 +69,8 @@ class Effect:
                 self.image[0].clip_draw(self.frame[i] * data['Effect']['effect_hit_image_w'], 0, data['Effect']['effect_hit_image_w'], data['Effect']['effect_hit_image_h'], self.x[i], self.y[i])  #17
             elif self.type[i] == 1:
                 self.image[1].clip_draw(self.frame[i] * data['Effect']['effect_death_image_wh'], 0, data['Effect']['effect_death_image_wh'], data['Effect']['effect_death_image_wh'], self.x[i], self.y[i])  #15
-
+            elif self.type[i] == 2:
+                self.image[2].clip_draw(self.frame[i] * data['Effect']['effect_power_up_w'], 60, data['Effect']['effect_power_up_w'], data['Effect']['effect_power_up_h'], self.x[i], self.y[i])  #15
 
     def create_effect(self, type, xDot, yDot):
         for i in range(EFFECT_MAX):
@@ -68,8 +78,9 @@ class Effect:
                 self.x[i] = xDot
                 if type == 0:
                     self.y[i] = yDot + data['Effect']['effect_hit_range']
-                elif type == 1:
+                elif type == 1 or type == 2:
                     self.y[i] = yDot
+
                 self.type[i] = type
                 self.use_flag[i] = 1
                 self.totalframe[i] = data['Effect']['totalframe']

@@ -10,6 +10,7 @@ from Bomb import*
 from Item import*
 from Effect import*
 from Boss import*
+from UI import *
 
 from pico2d import *
 
@@ -38,7 +39,7 @@ score = 0
 get_item_sound = None
 
 def enter():
-    global hero, missile, enemy, background, font, bomb, item, effect, boss, get_item_sound
+    global hero, missile, enemy, background, font, bomb, item, effect, boss, get_item_sound , credit , pushstart , powerbarui
     hero = Hero()
     missile = Missile()
     enemy = Enemy()
@@ -47,6 +48,8 @@ def enter():
     item = Item()
     effect = Effect()
     boss = Boss()
+    pushstart = PushStart()
+    powerbarui = PowerUI()
     font = load_font('ENCR10B.TTF', 30)
 
     if get_item_sound == None:
@@ -54,7 +57,7 @@ def enter():
         get_item_sound.set_volume(100)
 
 def exit():
-    global hero, missile, enemy, background, font, bomb, item, effect, boss
+    global hero, missile, enemy, background, font, bomb, item, effect, boss , pushstart , powerbarui
     del(hero)
     del(missile)
     del(enemy)
@@ -64,6 +67,9 @@ def exit():
     del(item)
     del(effect)
     del(boss)
+    del(pushstart)
+    del(credit)
+    del(powerbarui)
 
 def pause():
     pass
@@ -101,7 +107,7 @@ def check_collision(a, b, a_num , b_num, a_type, b_type):
     return True
 
 def update(frame_time):
-    global background, hero, missile, enemy, bomb, item, effect, boss, score
+    global background, hero, missile, enemy, bomb, item, effect, boss, score,pushstart
 
     background.update(frame_time)
     hero.update(frame_time, missile)
@@ -110,6 +116,7 @@ def update(frame_time):
     bomb.update(frame_time)
     item.update(frame_time)
     effect.update(frame_time)
+    pushstart.update(frame_time)
     boss.update(frame_time, missile, score, background)
 
 
@@ -188,6 +195,7 @@ def update(frame_time):
             continue
 
         if check_collision(hero, item, None, i_num, None, None):
+            effect.create_effect(2, hero.x, hero.y)
             item.use_flag[i_num] = 0
             item.x[i_num] = data['Item']['x']
             item.y[i_num] = data['Item']['y']
@@ -209,7 +217,7 @@ def get_score():
     score = enemy.enemy_score + boss.boss_score
 
 def draw(frame_time):
-    global background, hero, missile, enemy, bomb, item, effect, font, score
+    global background, hero, missile, enemy, bomb, item, effect, font, score,credit , pushstart
 
     clear_canvas()
     background.draw(frame_time)
@@ -220,8 +228,10 @@ def draw(frame_time):
     missile.draw(frame_time)
     bomb.draw(frame_time)
     effect.draw(frame_time)
+    pushstart.draw(frame_time)
+    powerbarui.draw(frame_time)
 
-    font.draw(10, 700, '[Score : %d]' %(score), (255,255,255))
+    font.draw(10, 640, '[Score : %d]' %(score), (255,255,255))
     font.draw(350, 30, '[Bomb : %d]' %(bomb.use_number), (255,255,255))
 
     update_canvas()

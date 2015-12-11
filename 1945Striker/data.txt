@@ -11,7 +11,7 @@
 	},
 
 	"BackGround" : {
-	"w":550, "h":730, "bottom":0, "left":0, "right":550, "top":730,
+	"w":550, "h":680, "bottom":0, "left":0, "right":550, "top":730,
 	"background_speed": 2
 
 	},
@@ -66,9 +66,10 @@
 	"Effect": {
 	"EFFECT_MAX":50,
 	"TIME_PER_ACTION":0.95, "FRAMES_PER_ACTION_HIT":17, "FRAMES_PER_ACTION_DEATH":15,
-	"image_num":2, "x":0, "y":0, "frame":0, "totalframe":0, "use_flag":0, "type":0,
+	"image_num":3, "x":0, "y":0, "frame":0, "totalframe":0, "use_flag":0, "type":0,
 	"effect_hit_image_w":32, "effect_hit_image_h":96, "effect_death_image_wh":128,
-	"effect_hit_range":64
+	"effect_hit_range":64,
+	"effect_power_up_w":107 , "effect_power_up_h":60
 	},
 
 	"Boss":{
