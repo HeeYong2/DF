@@ -4,16 +4,14 @@ import json
 import SelectCraft
 
 name = "RankingState"
-image = None
+image = [None] * 2
 font = None
-data_file = open('data.txt', 'r')
-data = json.load(data_file)
-data_file.close()
+
 
 def enter():
     global image, font
-    image = load_image('blackboard.png')
-    font = load_font('ENCR10B.TTF', 30)
+    image[0] = load_image('gameover.png')
+    image[1] = load_image('blackboard.png')
 
 
 def exit():
@@ -23,26 +21,18 @@ def exit():
 def update(frame_time):
     pass
 
-def get_key(item):
-    return item['score']
 
-def draw_ranking():
-    with open('score.txt','r') as f:
-        score_list = json.load(f)
-    score_list.sort(key=get_key, reverse=True)
-    top_10 = score_list[:10]
-    font.draw(data['BackGround']['w']/2 - 90, 600, '[Ranking]', (255,255,255))
-    font.draw(10,30, '[ReGame: PRESS R]', (255,255,255))
-    for i, record in enumerate(top_10):
-        font.draw(100, 550 - i * 40, '#%2d    (Score : %d)' % (i+1, record['score']), (255,255,255))
+
+
 
 
 def draw(frame_time):
     global image
     clear_canvas()
-    image.draw(data['BackGround']['w']/2, data['BackGround']['h']/2)
+    image[1].draw(275 , 365)
+    image[0].draw(275 , 340)
 
-    draw_ranking()
+
 
     update_canvas()
 

@@ -68,7 +68,6 @@ def exit():
     del(effect)
     del(boss)
     del(pushstart)
-    del(credit)
     del(powerbarui)
 
 def pause():
